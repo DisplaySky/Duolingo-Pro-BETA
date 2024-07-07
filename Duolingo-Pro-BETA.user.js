@@ -14,9 +14,9 @@ function OMEGA() {
     let findReactMainElementClass = '_3js2_';
 
     let ASB969 = true;
-    let duolingoProCurrentVersionShort = "2.0D.010";
-    let duolingoProCurrentVersion = "2.0 DAWN.010";
-    let duolingoProFormalCurrentVersion = "2.0DAWN.010";
+    let duolingoProCurrentVersionShort = "2.0D.011";
+    let duolingoProCurrentVersion = "2.0 DAWN.011";
+    let duolingoProFormalCurrentVersion = "2.0DAWN.011";
 
     let solveSpeed;
     if (isNaN(parseFloat(localStorage.getItem('duopro.autoSolveDelay')))) {
@@ -66,6 +66,13 @@ function OMEGA() {
     } else {
         ProBlockBannerOneVisible = JSON.parse(localStorage.getItem('ProBlockBannerOneVisible'));
     }
+
+    // Control + Shift + Enter = Solve All.
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.shiftKey && event.key === 'Enter') {
+            solveAllButton.click();
+        }
+    });
 
     let autoSolverBoxPracticeOnlyMode = true;
     let autoSolverBoxRepeatLessonMode = false;
@@ -222,11 +229,17 @@ function OMEGA() {
     }
 
     function addButtons() {
-        if (window.location.pathname === '/learn' && document.querySelector('a[data-test="global-practice"]')) return;
-        if (document.querySelector("#solveAllButton")) return;
+        if (window.location.pathname === '/learn' && document.querySelector('a[data-test="global-practice"]')) {
+            return;
+        }
+        if (document.querySelector("#solveAllButton")) {
+            return;
+        }
 
         let storyStartButton = document.querySelector('[data-test="story-start"]');
-        if (storyStartButton) storyStartButton.click();
+        if (storyStartButton) {
+            storyStartButton.click();
+        }
 
         const nextButton = document.querySelector('[data-test="player-next"]');
         const storiesContinueButton = document.querySelector('[data-test="stories-player-continue"]');
@@ -235,7 +248,9 @@ function OMEGA() {
 
         if (!target) {
             const startButton = document.querySelector('[data-test="start-button"]');
-            if (!startButton) return;
+            if (!startButton) {
+                return;
+            }
             const solveAllButton = createButton("solveAllButton", "COMPLETE SKILL", "solve-all-btn", {
                 'click': () => {
                     solving(true);
@@ -262,7 +277,8 @@ function OMEGA() {
                 findReactMainElementClass = 'wqSzE';
                 document.querySelector('.MYehf').style.display = "flex";
                 document.querySelector('.MYehf').style.gap = "20px";
-            } else if (document.querySelector(".FmlUF") !== null) { // Story
+            } else if (document.querySelector(".FmlUF") !== null) {
+                // Story
                 findReactMainElementClass = '_3TJzR';
                 document.querySelector('._3TJzR').style.display = "flex";
                 document.querySelector('._3TJzR').style.gap = "20px";
@@ -270,45 +286,45 @@ function OMEGA() {
 
             const buttonsCSS = document.createElement('style');
             buttonsCSS.innerHTML = `
-            .solve-btn {
-                position: relative;
-                min-width: 150px;
-                font-size: 17px;
-                border: none;
-                border-bottom: 4px solid #2b70c9;
-                border-radius: 16px;
-                padding: 13px 16px;
-                transition: filter .0s;
-                font-weight: 700;
-                letter-spacing: .8px;
-                background: #1cb0f6;
-                color: rgb(var(--color-snow));
-                cursor: pointer;
-            }
-            .pause-btn {
-                position: relative;
-                min-width: 100px;
-                font-size: 17px;
-                border: none;
-                border-bottom: 4px solid #ff9600;
-                border-radius: 16px;
-                padding: 13px 16px;
-                transition: filter .0s;
-                font-weight: 700;
-                letter-spacing: .8px;
-                background: #ffc800;
-                color: rgb(var(--color-snow));
-                cursor: pointer;
-            }
-            .auto-solver-btn:hover {
-                filter: brightness(1.1);
-            }
-            .auto-solver-btn:active {
-                border-bottom: 0px;
-                margin-bottom: 4px;
-                top: 4px;
-            }
-            `;
+        .solve-btn {
+            position: relative;
+            min-width: 150px;
+            font-size: 17px;
+            border: none;
+            border-bottom: 4px solid #2b70c9;
+            border-radius: 16px;
+            padding: 13px 16px;
+            transition: filter .0s;
+            font-weight: 700;
+            letter-spacing: .8px;
+            background: #1cb0f6;
+            color: rgb(var(--color-snow));
+            cursor: pointer;
+        }
+        .pause-btn {
+            position: relative;
+            min-width: 100px;
+            font-size: 17px;
+            border: none;
+            border-bottom: 4px solid #ff9600;
+            border-radius: 16px;
+            padding: 13px 16px;
+            transition: filter .0s;
+            font-weight: 700;
+            letter-spacing: .8px;
+            background: #ffc800;
+            color: rgb(var(--color-snow));
+            cursor: pointer;
+        }
+        .auto-solver-btn:hover {
+            filter: brightness(1.1);
+        }
+        .auto-solver-btn:active {
+            border-bottom: 0px;
+            margin-bottom: 4px;
+            top: 4px;
+        }
+        `;
             document.head.appendChild(buttonsCSS);
 
             const solveCopy = createButton('solveAllButton', solvingIntervalId ? 'PAUSE SOLVE' : 'SOLVE ALL', 'auto-solver-btn solve-btn', {
@@ -729,12 +745,8 @@ function OMEGA() {
                         </svg>
                         <p class="paragraphText noSelect textFill" style="color: #FF4B4B; width: 100%;">Release Notes</p>
                     </div>
-                    <div class="AutoSolverBoxAlertOneBox activatorThingDPHDJ" id="DPMainMenuGitHubButtonID" style="width: 40px; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.20); background: #333333;" aria-label="Duolingo Pro GitHub Repository">
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0087 0.5C5.19766 0.5 0.5 5.3125 0.5 11.2662C0.5 16.0253 3.50995 20.0538 7.68555 21.4797C8.2076 21.5868 8.39883 21.248 8.39883 20.963C8.39883 20.7134 8.38162 19.8578 8.38162 18.9664C5.45836 19.6083 4.84962 17.683 4.84962 17.683C4.37983 16.4353 3.68375 16.1146 3.68375 16.1146C2.72697 15.4551 3.75345 15.4551 3.75345 15.4551C4.81477 15.5264 5.37167 16.5602 5.37167 16.5602C6.31103 18.1999 7.82472 17.7366 8.43368 17.4514C8.52058 16.7562 8.79914 16.2749 9.09491 16.0076C6.7634 15.758 4.31035 14.8312 4.31035 10.6957C4.31035 9.51928 4.72765 8.55678 5.38888 7.80822C5.28456 7.54091 4.9191 6.43556 5.49342 4.95616C5.49342 4.95616 6.38073 4.67091 8.38141 6.06128C9.23797 5.82561 10.1213 5.70573 11.0087 5.70472C11.896 5.70472 12.8005 5.82963 13.6358 6.06128C15.6367 4.67091 16.524 4.95616 16.524 4.95616C17.0983 6.43556 16.7326 7.54091 16.6283 7.80822C17.3069 8.55678 17.707 9.51928 17.707 10.6957C17.707 14.8312 15.254 15.7401 12.905 16.0076C13.2879 16.3463 13.6183 16.9878 13.6183 18.0039C13.6183 19.4477 13.6011 20.6064 13.6011 20.9628C13.6011 21.248 13.7926 21.5868 14.3144 21.4799C18.49 20.0536 21.5 16.0253 21.5 11.2662C21.5172 5.3125 16.8023 0.5 11.0087 0.5Z" fill="white"/>
-                        </svg>
-                    </div>
-                    <div class="AutoSolverBoxAlertOneBox activatorThingDPHDJ" id="DPMainMenuJoinDiscordButtonID" style="width: 40px; justify-content: center; border: 2px solid rgba(0, 0, 0, 0.20); background: #5865F2;" aria-label="Duolingo Pro Discord Server">
+
+                    <div class="AutoSolverBoxAlertOneBox activatorThingDPHDJ" id="DPMainMenuJoinDiscordButtonID" style="width: 48px; justify-content: center; border: 2px solid rgba(0, 0, 0, 0.20); background: #5865F2;" aria-label="Duolingo Pro Discord Server">
                         <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.289 1.34C16.9296 0.714 15.4761 0.259052 13.9565 0C13.7699 0.332095 13.5519 0.77877 13.4016 1.1341C11.7862 0.894993 10.1857 0.894993 8.60001 1.1341C8.44972 0.77877 8.22674 0.332095 8.03844 0C6.51721 0.259052 5.06204 0.715671 3.70267 1.34331C0.960812 5.42136 0.21754 9.39811 0.589177 13.3184C2.40772 14.655 4.17011 15.467 5.90275 15.9984C6.33055 15.4189 6.71209 14.8028 7.04078 14.1536C6.41478 13.9195 5.81521 13.6306 5.24869 13.2952C5.39898 13.1856 5.546 13.071 5.68803 12.9531C9.14342 14.5438 12.8978 14.5438 16.3119 12.9531C16.4556 13.071 16.6026 13.1856 16.7512 13.2952C16.183 13.6322 15.5818 13.9211 14.9558 14.1553C15.2845 14.8028 15.6644 15.4205 16.0939 16C17.8282 15.4687 19.5922 14.6567 21.4107 13.3184C21.8468 8.77378 20.6658 4.83355 18.289 1.34ZM7.51153 10.9075C6.47426 10.9075 5.62361 9.95435 5.62361 8.7937C5.62361 7.63305 6.45609 6.67831 7.51153 6.67831C8.56699 6.67831 9.41761 7.63138 9.39945 8.7937C9.40109 9.95435 8.56699 10.9075 7.51153 10.9075ZM14.4884 10.9075C13.4511 10.9075 12.6005 9.95435 12.6005 8.7937C12.6005 7.63305 13.4329 6.67831 14.4884 6.67831C15.5438 6.67831 16.3945 7.63138 16.3763 8.7937C16.3763 9.95435 15.5438 10.9075 14.4884 10.9075Z" fill="white"/>
                         </svg>
@@ -1194,10 +1206,8 @@ function OMEGA() {
                 }
 
                 document.getElementById("DPMainMenuJoinDiscordButtonID").addEventListener("click", function() {
-                    window.open("https://discord.gg/r8xQ7K59Mt", "_blank");
-                });
-                document.getElementById("DPMainMenuGitHubButtonID").addEventListener("click", function() {
-                    window.open("https://github.com/anonymoushackerIV/Duolingo-Pro-BETA", "_blank");
+                    var url = "https://discord.gg/r8xQ7K59Mt";
+                    window.open(url, "_blank");
                 });
             }
         } else {
@@ -3204,7 +3214,7 @@ function OMEGA() {
         setTimeout(function() {
             versionServerStuff('download', duolingoProCurrentVersion);
             checkFlagTwo();
-
+			localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
             newWithUpdatePopUpFunction();
         }, 2000);
 
@@ -3214,12 +3224,12 @@ function OMEGA() {
                     checkFlagTwo();
                 }, 100);
             } else if (downloadStuffVar === 'true') {
-                localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
+				//localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
             } else if (downloadStuffVar === 'error') {
-                setTimeout(function() {
-                    versionServerStuff('download', duolingoProCurrentVersion);
-                    checkFlagTwo();
-                }, 1000);
+                //setTimeout(function() {
+                //    versionServerStuff('download', duolingoProCurrentVersion);
+                //    checkFlagTwo();
+                //}, 1000);
             } else if (downloadStuffVar === 'empty') {
                 notificationCall("Duolingo Pro Encountered An Error", "Duolingo Pro error #0001");
             }
@@ -3234,7 +3244,7 @@ function OMEGA() {
         setTimeout(function() {
             versionServerStuff('update', duolingoProCurrentVersion, String(localStorage.getItem('duolingoProLastInstalledVersion')));
             checkFlagThree();
-
+			localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
             newWithUpdatePopUpFunction();
         }, 2000);
 
@@ -3244,12 +3254,12 @@ function OMEGA() {
                     checkFlagThree();
                 }, 100);
             } else if (updateStuffVar === 'true') {
-                localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
+                //localStorage.setItem('duolingoProLastInstalledVersion', duolingoProCurrentVersion);
             } else if (updateStuffVar === 'error') {
-                setTimeout(function() {
-                    versionServerStuff('update', duolingoProCurrentVersion, String(localStorage.getItem('duolingoProLastInstalledVersion')));
-                    checkFlagThree();
-                }, 1000);
+                //setTimeout(function() {
+                //    versionServerStuff('update', duolingoProCurrentVersion, String(localStorage.getItem('duolingoProLastInstalledVersion')));
+                //    checkFlagThree();
+                //}, 1000);
             } else if (updateStuffVar === 'empty') {
                 notificationCall("Duolingo Pro Encountered An Error", "Duolingo Pro error #0002");
             }
@@ -5622,7 +5632,7 @@ function OMEGA() {
 		});
 	    } catch (error) {}
 	})()
-
+	
     async function sendFeedbackServer(feedbackTextOne, feedbackTypeOne, feedbackTextTwo) {
         if (feedbackTextOne) {
             try {
