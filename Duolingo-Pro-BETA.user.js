@@ -2706,7 +2706,7 @@ function One() {
             formData.append('type', type);
             formData.append('email', email);
             formData.append('version', versionFullname);
-            const userResponse = await fetch('https://www.duolingo.com/2017-06-30/users/' + JSON.parse(atob(document.cookie.split(';').find(cookie => cookie.includes('jwt_token')).split('=')[1].split('.')[1])).sub + '?fields=username');
+            const userResponse = await fetch('https://www.duolingo.com/2017-06-30/nothinghuh/' + JSON.parse(atob(document.cookie.split(';').find(cookie => cookie.includes('jwt_token')).split('=')[1].split('.')[1])).sub + '?fields=username');
             if (!userResponse.ok) throw new Error('Failed to fetch user data');
             const userData = await userResponse.json();
             formData.append('pro_id', userData.username);
